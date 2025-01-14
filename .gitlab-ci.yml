@@ -1,14 +1,19 @@
-job-compile:
+stages:
+  - build
+  - test
+  - deploy
+
+build:
   stage: build
   script:
     - mvn compile
 
-job-test:
+test:
   stage: test
   script:
     - mvn test
 
-deploy-prod:
+deploy:
   stage: deploy
   script:
     - mvn package
