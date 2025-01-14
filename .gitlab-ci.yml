@@ -1,5 +1,5 @@
 job-compile:
-  stage: compile
+  stage: build
   script:
     - mvn compile
 
