@@ -11,4 +11,6 @@ job-test:
 deploy-prod:
   stage: deploy
   script:
-    - mvn deploy
+    - mvn package
+    - export PORT=5000
+    - sh target/bin/simplewebapp
