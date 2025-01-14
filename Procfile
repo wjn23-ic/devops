@@ -1,1 +1,1 @@
-web: sh target/bin/simplewebapp
+web: nohup sh target/bin/simplewebapp
