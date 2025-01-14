@@ -1,0 +1,14 @@
+job-compile:
+  stage: compile
+  script:
+    - mvn compile
+
+job-test:
+  stage: test
+  script:
+    - mvn test
+
+deploy-prod:
+  stage: deploy
+  script:
+    - mvn deploy
