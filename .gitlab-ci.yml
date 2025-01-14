@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - deploy
+  - tsuru
 
 build:
   stage: build
@@ -16,6 +17,10 @@ test:
 deploy:
   stage: deploy
   script:
-    - mvn package
     - export PORT=5000
-    - sh target/bin/simplewebapp
+
+tsuru:
+  stage: tsuru
+  script:
+    - mvn package
+    - tsuru app deploy --app simplewebapp-tc2323 target ./Procfile
