@@ -12,4 +12,4 @@ COPY . /app
 
 RUN mvn clean package
 
-CMD ["sh", "target/bin/simplewebapp"]
+CMD ["nohup", "sh", "target/bin/simplewebapp", "&"]
