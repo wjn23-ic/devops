@@ -23,4 +23,4 @@ tsuru:
   stage: tsuru
   script:
     - mvn package
-    - tsuru app deploy --app simplewebapp-tc2323 target ./Procfile
+    - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
