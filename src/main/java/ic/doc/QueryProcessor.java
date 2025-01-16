@@ -42,7 +42,7 @@ public class QueryProcessor {
         }
 
         if (query.toLowerCase().contains("mj")) {
-            results.append("Michael Joseph Jackson (August 29, 1958 – June 25, 2009) was an American\n" +
+            results.append("Michael Joseph Jackson (August 29, 1958 - June 25, 2009) was an American\n" +
                            "singer, songwriter, dancer, and philanthropist. Dubbed the 'King of Pop',\n" +
                            "he is regarded as one of the most significant cultural figures ever. \n");
             results.append(System.lineSeparator());
