@@ -43,12 +43,21 @@ public class PDFResultPage implements Page {
         pb.redirectErrorStream(true); // Combine stdout and stderr for debugging
         Process process = pb.start();
 
-        // Read process output for debugging (optional)
+        // Read process output for debugging
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
+        }
+        // Ensure the process completed successfully
+        try {
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                throw new IOException("Pandoc process failed with exit code: " + exitCode);
+            }
+        } catch (InterruptedException e) {
+            throw new IOException("Pandoc process was interrupted.", e);
         }
 
 
