@@ -23,7 +23,8 @@ public class IndexPage implements Page {
                         "<input type=\"text\" name=\"q\" required />" +
                         "<br><br>" +
                         "<label><input type=\"radio\" name=\"format\" value=\"html\" checked> View as HTML</label><br>" +
-                        "<label><input type=\"radio\" name=\"format\" value=\"markdown\"> Download as Markdown</label><br><br>" +
+                        "<label><input type=\"radio\" name=\"format\" value=\"markdown\"> Download as Markdown</label><br>" +
+                        "<label><input type=\"radio\" name=\"format\" value=\"pdf\"> Download as PDF</label><br><br>" +
                         "<input type=\"submit\" value=\"Submit\">" +
                         "<form>" +
                         "</p>");

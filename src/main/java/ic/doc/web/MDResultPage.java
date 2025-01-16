@@ -2,7 +2,6 @@ package ic.doc.web;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.InputStream;
