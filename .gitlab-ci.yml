@@ -40,6 +40,5 @@ tsuru:
   stage: tsuru
   script:
     - echo "Deploying with Tsuru..."
-    - sudo curl -fsSL "https://tsuru.io/get" | bash
     - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
     - echo "Deployed successfully"
