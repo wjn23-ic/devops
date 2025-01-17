@@ -29,8 +29,11 @@ test:
 deploy:
   stage: deploy
   script:
-    - echo "Packaging application..."
+    - echo "Packaging and deploying application..."
     - mvn package
+    - sudo ufw allow 5000
+    - export PORT=5000
+    - nohup sh target/bin/simplewebapp
     - echo "Packaged successfully"
 
 tsuru:
