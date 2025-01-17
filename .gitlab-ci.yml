@@ -36,7 +36,7 @@ test:
 build_image:
   stage: build
   tags:
-    - docker
+    - Docker-1
   image: docker:latest
   services:
     - docker:dind
