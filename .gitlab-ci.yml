@@ -15,19 +15,27 @@ cache:
 compile:
   stage: compile
   script:
+    - echo "Compiling..."
     - mvn compile
+    - echo "Compiled successfully"
 
 test:
   stage: test
   script:
+    - echo "Testing..."
     - mvn test
+    - echo "Tests ran successfully"
 
 deploy:
   stage: deploy
   script:
+    - echo "Packaging application..."
     - mvn package
+    - echo "Packaged successfully"
 
 tsuru:
   stage: tsuru
   script:
+    - echo "Deploying with Tsuru..."
     - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
+    - echo "Deployed successfully"
