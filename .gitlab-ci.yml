@@ -3,11 +3,14 @@ image: maven:3-openjdk-11
 stages:
   - compile
   - test
+  - build
   - deploy
   - tsuru
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
 
 cache:
   paths:
@@ -15,6 +18,8 @@ cache:
 
 compile:
   stage: compile
+  tags:
+    - shell
   script:
     - echo "Compiling..."
     - mvn compile
@@ -22,13 +27,31 @@ compile:
 
 test:
   stage: test
+  tags:
+    - shell
   script:
     - echo "Testing..."
     - mvn test
     - echo "Tests ran successfully"
 
+build_image:
+  stage: build
+  tags:
+    - Docker-1
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - echo "Building Docker image..."
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+
+
 deploy:
   stage: deploy
+  tags:
+    - shell
   script:
     - echo "Packaging application..."
     - mvn package
@@ -38,7 +61,9 @@ deploy:
 
 tsuru:
   stage: tsuru
+  tags:
+    - shell
   script:
     - echo "Deploying with Tsuru..."
-    - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
+    - tsuru app deploy --app simplewebapp-tc2323 --image "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" 
     - echo "Deployed successfully"
