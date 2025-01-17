@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'adoptopenjdk'  
+          distribution: 'temurin'
 
 
       - name: Cache Maven dependencies
@@ -45,6 +45,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'temurin'
 
       - name: Run tests
         run: mvn test
@@ -59,6 +60,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'temurin'
 
       - name: Build and package application
         run: mvn package
