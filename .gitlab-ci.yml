@@ -31,7 +31,7 @@ deploy:
   stage: deploy
   script:
     - echo "Packaging application..."
-    - mvn clean package
+    - mvn package
     - export PORT=5000
     - nohup sh target/bin/simplewebapp > simplewebapp.log 2>&1 </dev/null &
     - echo "Packaged successfully"
