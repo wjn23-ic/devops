@@ -30,6 +30,8 @@ deploy:
   script:
     - echo "Packaging application..."
     - mvn package
+    - export PORT:5000
+    - nohup sh target/bin/simplewebapp > simplewebapp.log 2>&1 </dev/null &
     - echo "Packaged successfully"
 
 tsuru:
