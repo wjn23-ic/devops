@@ -1,11 +1,19 @@
 stages:
-  - build
+  - compile
   - test
   - deploy
   - tsuru
 
-build:
-  stage: build
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+
+compile:
+  stage: compile
   script:
     - mvn compile
 
@@ -17,10 +25,9 @@ test:
 deploy:
   stage: deploy
   script:
-    - export PORT=5000
+    - mvn package
 
 tsuru:
   stage: tsuru
   script:
-    - mvn package
     - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
