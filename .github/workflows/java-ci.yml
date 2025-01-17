@@ -4,11 +4,11 @@ name: Java CI Workflow
 on:
   push:
     branches:
-      - main
+      - master
       - feat--container-registry
   pull_request:
     branches:
-      - main   # or your default branch
+      - master  
 
 jobs:
   compile:
