@@ -7,6 +7,7 @@ stages:
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  DOCKER_DRIVER: overlay2
 
 cache:
   paths:
@@ -34,9 +35,9 @@ build_image:
     - docker:dind
   script:
     - echo "Building Docker image..."
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" 
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
       "$CI_REGISTRY"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
 
 
