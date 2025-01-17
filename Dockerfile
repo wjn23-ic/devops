@@ -12,6 +12,6 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mvn clean package
+RUN mvn package
 
 CMD ["nohup", "sh", "target/bin/simplewebapp", "&"]
