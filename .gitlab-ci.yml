@@ -17,6 +17,8 @@ cache:
 
 compile:
   stage: compile
+  tags:
+    - shell
   script:
     - echo "Compiling..."
     - mvn compile
@@ -24,6 +26,8 @@ compile:
 
 test:
   stage: test
+  tags:
+    - shell
   script:
     - echo "Testing..."
     - mvn test
@@ -45,6 +49,8 @@ build_image:
 
 deploy:
   stage: deploy
+  tags:
+    - shell
   script:
     - echo "Packaging application..."
     - mvn package
@@ -52,6 +58,8 @@ deploy:
 
 tsuru:
   stage: tsuru
+  tags:
+    - shell
   script:
     - echo "Deploying with Tsuru..."
     - tsuru app deploy --app simplewebapp-tc2323 --image "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" 
