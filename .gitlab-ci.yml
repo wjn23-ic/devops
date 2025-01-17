@@ -38,5 +38,6 @@ tsuru:
   stage: tsuru
   script:
     - echo "Deploying with Tsuru..."
+    - mvn package
     - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
     - echo "Deployed successfully"
