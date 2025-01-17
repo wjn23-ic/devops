@@ -25,7 +25,7 @@ jobs:
 
 
       - name: Cache Maven dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -73,11 +73,16 @@ jobs:
   tsuru:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Tsuru CLI
+        run: |
+          curl -sL https://tsuru.io/install.sh | bash
+          tsuru --version
 
       - name: Deploy with Tsuru
         run: |
           echo "Deploying with Tsuru..."
           tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
-          echo "Deployed successfully"
+        
