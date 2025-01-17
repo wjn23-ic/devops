@@ -1,6 +1,7 @@
 stages:
   - compile
   - test
+  - build
   - deploy
   - tsuru
 
@@ -26,6 +27,19 @@ test:
     - mvn test
     - echo "Tests ran successfully"
 
+build_image:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - echo "Building Docker image..."
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" 
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
+      "$CI_REGISTRY"
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+
+
 deploy:
   stage: deploy
   script:
@@ -37,5 +51,6 @@ tsuru:
   stage: tsuru
   script:
     - echo "Deploying with Tsuru..."
-    - tsuru app deploy --app simplewebapp-tc2323 --dockerfile .
+    - tsuru app deploy --app simplewebapp-tc2323 
+      --image "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" 
     - echo "Deployed successfully"
