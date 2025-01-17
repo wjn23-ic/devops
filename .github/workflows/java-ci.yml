@@ -75,7 +75,7 @@ jobs:
   tsuru:
     runs-on: ubuntu-latest
     container:
-      image: abcd-maven-tsuru  # Use the custom Docker image
+      image: ta2723/maven-tsuru:latest
 
     steps:
       - name: Check out repository
